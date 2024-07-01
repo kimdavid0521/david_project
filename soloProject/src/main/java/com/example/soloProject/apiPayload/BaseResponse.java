@@ -39,8 +39,4 @@ public class BaseResponse<T> {  //성공이나 실패할시 리턴할 함수들�
         return new BaseResponse<>(false, code, message, data);
     }
 
-
-
-
-
 }
