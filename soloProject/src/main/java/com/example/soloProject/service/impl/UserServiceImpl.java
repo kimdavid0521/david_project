@@ -42,6 +42,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    //유저 delete
+    @Override
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserHandler(ErrorStatus._USER_NOT_FOUND));
+        userRepository.delete(user);
+    }
+
+
+
 
 
 }

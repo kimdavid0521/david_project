@@ -39,4 +39,11 @@ public class UserController {
         return BaseResponse.onSuccess(UserConverter.toPreviewResultListDTO(userList));
     }
 
+    //유저 delete
+    @DeleteMapping("api/v1/users/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+    }
+
+
 }
