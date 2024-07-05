@@ -25,7 +25,7 @@ public class Post extends BaseEntity {
 
     private String content;
 
-    //private boolean isSecret;
+    private boolean isSecret;
 
     //유저 엔티티랑 다대일 매핑
     @ManyToOne(fetch = FetchType.LAZY)

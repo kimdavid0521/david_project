@@ -18,7 +18,7 @@ public class PostController {
     private final PostService postService;
 
     //게시글 등록 create
-    @PostMapping("api/v1/post")
+    @PostMapping("/api/v1/post")
     public BaseResponse<PostResponseDTO.uploadResultDTO> uploadPost(@RequestBody PostRequestDTO.UploadPostDTO uploadPostDTO) {
         Post post = postService.createPost(uploadPostDTO);
         return BaseResponse.onSuccess(PostConverter.toUploadResultDTO(post));

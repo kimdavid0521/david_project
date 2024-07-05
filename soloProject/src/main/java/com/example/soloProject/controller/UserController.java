@@ -33,7 +33,7 @@ public class UserController {
     }
 
     //유저 전체 조회
-    @PostMapping("/api/v1/users")
+    @GetMapping("/api/v1/users")
     public BaseResponse<UserResponseDTO.UserPreviewListDTO> readAllUser() {
         List<User> userList = userService.readAllUsers();
         return BaseResponse.onSuccess(UserConverter.toPreviewResultListDTO(userList));

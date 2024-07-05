@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor()
+@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Reply extends BaseEntity {

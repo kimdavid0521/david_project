@@ -20,8 +20,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post createPost(PostRequestDTO.UploadPostDTO uploadPostDTO) {
-        Post post = PostConverter.toPost(uploadPostDTO);
-        return postRepository.save(post);
+            Post post = PostConverter.toPost(uploadPostDTO);
+            return postRepository.save(post);
     }
 
 

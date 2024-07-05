@@ -12,6 +12,7 @@ public class PostConverter {
         return Post.builder()
                 .title(uploadPostDTO.getTitle())
                 .content(uploadPostDTO.getContent())
+                .isSecret(uploadPostDTO.isSecrete())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class PostConverter {
         return PostResponseDTO.postPreviewDTO.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
+                .isSecrete(post.isSecret())
                 .createAt(post.getCreateAt())
                 .updateAt(post.getUpdateAt())
                 .build();

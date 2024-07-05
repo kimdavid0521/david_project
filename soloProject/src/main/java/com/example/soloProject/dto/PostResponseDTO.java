@@ -28,6 +28,7 @@ public class PostResponseDTO {
     public static class postPreviewDTO {
         private String title;
         private String content;
+        private boolean isSecrete;
         private LocalDateTime createAt;
         private LocalDateTime updateAt;
     }
