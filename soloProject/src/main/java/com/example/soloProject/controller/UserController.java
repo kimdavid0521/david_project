@@ -47,4 +47,14 @@ public class UserController {
         return BaseResponse.onSuccess("삭제 되었습니다.");
     }
 
+    //유저 이름 업데이트
+    @PatchMapping("/user/{userId}")
+    public BaseResponse<UserResponseDTO.UserPreviewDTO> updateUser(@RequestBody UserRequestDTO.UpdateUserDTO updateUserDTO,
+                                                                   @PathVariable Long userId) {
+        User user = userService.updateUser(updateUserDTO, userId);
+        return BaseResponse.onSuccess(UserConverter.toPreviewResultDTO(user));
+    }
+
+
+
 }

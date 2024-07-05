@@ -31,4 +31,10 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Post> posts = new ArrayList<>();
+
+
+    //유저 업데이트 메서드
+    public void update(String name) {
+        this.name = name;
+    }
 }

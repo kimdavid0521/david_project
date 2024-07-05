@@ -15,13 +15,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
     //유저 등록 service
     @Override
-    @Transactional
     public User createUser(UserRequestDTO.JoinDTO joinDTO) {
         User user = UserConverter.toUser(joinDTO);
         return userRepository.save(user);
@@ -49,6 +49,13 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    //유저 이름 업데이트
+    @Override
+    public User updateUser(UserRequestDTO.UpdateUserDTO updateUserDTO, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserHandler(ErrorStatus._USER_NOT_FOUND));
+        user.update(updateUserDTO.getName()); //유저 엔티티에 만들어놨던 update 메서드를 통해 이름 업데이트
+        return user;
+    }
 
 
 

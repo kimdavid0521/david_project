@@ -9,11 +9,13 @@ import com.example.soloProject.repository.PostRepository;
 import com.example.soloProject.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
@@ -27,6 +29,7 @@ public class PostServiceImpl implements PostService {
 
     //post 단건 조회
     @Override
+    @Transactional(readOnly = true)
     public Post previewPost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new PostHandler(ErrorStatus._POST_NOT_FOUND));
         return post;
@@ -34,6 +37,7 @@ public class PostServiceImpl implements PostService {
 
     //post 전체조회
     @Override
+    @Transactional(readOnly = true)
     public List<Post> previewPostList() {
         return postRepository.findAll();
     }
@@ -43,6 +47,13 @@ public class PostServiceImpl implements PostService {
     public void deletePost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new PostHandler(ErrorStatus._POST_NOT_FOUND));
         postRepository.delete(post); //delete는 그냥 리턴값 없이 삭제
+    }
+
+    @Override
+    public Post updatePost(PostRequestDTO.UpdatePostDTO updatePostDTO, Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new PostHandler(ErrorStatus._POST_NOT_FOUND));
+        post.update(updatePostDTO.getTitle(), updatePostDTO.getContent());
+        return post;
     }
 
 }

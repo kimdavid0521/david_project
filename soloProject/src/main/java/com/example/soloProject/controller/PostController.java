@@ -34,7 +34,7 @@ public class PostController {
 
     //게시글 전체 조회
     @GetMapping("/posts")
-    public BaseResponse<PostResponseDTO.postPreviewListDTO> previewListDTO() {
+    public BaseResponse<PostResponseDTO.postPreviewListDTO> previewList() {
         List<Post> postList = postService.previewPostList();
         return BaseResponse.onSuccess(PostConverter.toPreviewPostListDTO(postList));
     }
@@ -46,4 +46,13 @@ public class PostController {
         postService.deletePost(postId);
         return BaseResponse.onSuccess("삭제 되었습니다.");
     }
+
+    //게시글 업데이트
+    @PatchMapping("/post/{postId}")
+    public BaseResponse<PostResponseDTO.postPreviewDTO> updatePost(@RequestBody PostRequestDTO.UpdatePostDTO updatePostDTO,
+                                                                   @PathVariable Long postId) {
+        Post post = postService.updatePost(updatePostDTO, postId);
+        return BaseResponse.onSuccess(PostConverter.toPreviewPostDTO(post));
+    }
+
 }
