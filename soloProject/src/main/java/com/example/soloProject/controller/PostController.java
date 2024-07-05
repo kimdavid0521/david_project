@@ -18,11 +18,14 @@ public class PostController {
 
     private final PostService postService;
 
+
     //게시글 등록 create
-    @PostMapping("/post")
-    public BaseResponse<PostResponseDTO.uploadResultDTO> uploadPost(@RequestBody PostRequestDTO.UploadPostDTO uploadPostDTO) {
-        Post post = postService.createPost(uploadPostDTO);
+    @PostMapping("/users/{userId}/post")
+    public BaseResponse<PostResponseDTO.uploadResultDTO> uploadPost(@RequestBody PostRequestDTO.UploadPostDTO uploadPostDTO,
+                                                                    @PathVariable Long userId) {
+        Post post = postService.createPost(uploadPostDTO, userId);
         return BaseResponse.onSuccess(PostConverter.toUploadResultDTO(post));
+
     }
 
     //게시글 아이디로 조회
@@ -30,6 +33,13 @@ public class PostController {
     public BaseResponse<PostResponseDTO.postPreviewDTO> previewPost(@PathVariable Long postId) {
         Post post = postService.previewPost(postId);
         return BaseResponse.onSuccess(PostConverter.toPreviewPostDTO(post));
+    }
+
+    //유저 엔티티로 게시글 조회
+    @GetMapping("/user/{userId}/post")
+    public BaseResponse<PostResponseDTO.postPreviewListDTO> readPostByUser(@PathVariable Long userId) {
+        List<Post> posts = postService.readPostByUsers(userId);
+        return BaseResponse.onSuccess(PostConverter.toPreviewPostListDTO(posts));
     }
 
     //게시글 전체 조회

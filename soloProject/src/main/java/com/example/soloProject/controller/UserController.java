@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
+//@CrossOrigin("*") //이렇게 cors에러를 해결 할 수도 있지만 모든 클래스에 추가해줘야한다는 번거로움이 있음
 public class UserController {
 
     private final UserService userService;

@@ -44,4 +44,9 @@ public class Post extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
+    //연관관계 편의 메서드
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface PostService {
 
-    Post createPost(PostRequestDTO.UploadPostDTO uploadPostDTO);
+    Post createPost(PostRequestDTO.UploadPostDTO uploadPostDTO, Long userId);
+
+    //user로 post 조회
+    List<Post> readPostByUsers(Long userId);
 
     //post 단건 조회
     Post previewPost(Long postId);
