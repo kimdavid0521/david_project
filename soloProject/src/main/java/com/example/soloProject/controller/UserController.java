@@ -13,19 +13,20 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class UserController {
 
     private final UserService userService;
 
     //유저 등록
-    @PostMapping("/api/v1/users")
+    @PostMapping("/users")
     public BaseResponse<UserResponseDTO.JoinResultDTO> createUser(@RequestBody UserRequestDTO.JoinDTO joinDTO) {
         User user = userService.createUser(joinDTO);
         return BaseResponse.onSuccess(UserConverter.toJoinResultDTO(user)); // toJoinResultDTO는 userConverter에서 아까 리턴해주려고 했던 joinResultDTO로 만들어주는 메서드
     }
 
     //유저 단건 조회
-    @GetMapping("/api/v1/{userId}")
+    @GetMapping("/{userId}")
     public BaseResponse<UserResponseDTO.UserPreviewDTO> readUser(@PathVariable Long userId) {
         User user = userService.readUser(userId);
         return BaseResponse.onSuccess(UserConverter.toPreviewResultDTO(user));
@@ -33,17 +34,17 @@ public class UserController {
     }
 
     //유저 전체 조회
-    @GetMapping("/api/v1/users")
+    @GetMapping("/users")
     public BaseResponse<UserResponseDTO.UserPreviewListDTO> readAllUser() {
         List<User> userList = userService.readAllUsers();
         return BaseResponse.onSuccess(UserConverter.toPreviewResultListDTO(userList));
     }
 
     //유저 delete
-    @DeleteMapping("api/v1/users/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
+    @DeleteMapping("/users/{userId}")
+    public BaseResponse<String> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
+        return BaseResponse.onSuccess("삭제 되었습니다.");
     }
-
 
 }
