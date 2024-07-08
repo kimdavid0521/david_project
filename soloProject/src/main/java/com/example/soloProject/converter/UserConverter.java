@@ -12,6 +12,8 @@ public class UserConverter {  //JoinDTO를 받아서 user을 만드는 메서드
     public static User toUser(UserRequestDTO.JoinDTO joinDTO) {
         return User.builder()
                 .name(joinDTO.getName())
+                .email(joinDTO.getEmail())
+                .password(joinDTO.getPassword())
                 .build();
     }
 

@@ -27,6 +27,12 @@ public class User extends BaseEntity {
     @Embedded
     private Address address;
 
+    private String email;
+
+    private String password;
+
+    private String role;
+
     //post 게시글이랑 일대다 매핑
     @OneToMany(mappedBy = "user")
     @Builder.Default
